@@ -15,10 +15,11 @@ RUN apt-get update && apt-get install -y \
     && service apache2 restart
 
 COPY ./opencart.zip /var/www/html/
-RUN apt-get install -y unzip \
-    && unzip /var/www/html/opencart.zip '*/upload/*' -d /var/www/html/ \
-    && mv /var/www/html/opencart-*/upload/* /var/www/html/ \
-    && rm -rf /var/www/html/opencart* \
-    && cp /var/www/html/config-dist.php /var/www/html/config.php \
-    && cp /var/www/html/admin/config-dist.php /var/www/html/admin/config.php \
-    && chown -R www-data:www-data /var/www/
+RUN apt-get install -y unzip 
+RUN mkdir /tmp/temp
+RUN unzip /var/www/html/opencart.zip -d /tmp/temp/ 
+RUN mv /tmp/temp/upload/* /var/www/html/ 
+RUN rm -rf /tmp/temp 
+RUN mv /var/www/html/config-dist.php /var/www/html/config.php
+RUN mv /var/www/html/admin/config-dist.php /var/www/html/admin/config.php 
+RUN chown -R www-data:www-data /var/www/

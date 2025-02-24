@@ -19,6 +19,8 @@ services:
       MYSQL_DATABASE: opencart
       MYSQL_USER: user
       MYSQL_PASSWORD: password
+    volume:
+      - db_data: /var/lib/mysql/opencart
     ports:
       - "3306:3306"
     
