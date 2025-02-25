@@ -58,6 +58,7 @@ The `Dockerfile` is set up with `php:8.2-apache` as a base image, and several PH
 ## Docker Compose for OpenCart
 
 The `docker-compose.yaml` file should define the services required to run OpenCart, including web, database, and possibly admin tools like phpMyAdmin. Ensure it's configured to match the dependencies and network configurations required by OpenCart.
+access phpmyadmin on: http://127.0.0.1:8080/
 
 ## Conclusion
 
