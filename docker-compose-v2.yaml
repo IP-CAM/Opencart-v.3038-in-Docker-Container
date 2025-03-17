@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:5.7
+    container_name: opencart_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ajay2701
+      MYSQL_DATABASE: jadau
+      MYSQL_USER: root
+      MYSQL_PASSWORD: ajay2701
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  opencart:
+    image: opencart/opencart:3.0.3.9-apache
+    container_name: opencart_web
+    restart: always
+    depends_on:
+      - db
+    environment:
+      - OPENCART_DB_DRIVER=mysqli
+      - OPENCART_DB_HOSTNAME=db
+      - OPENCART_DB_USERNAME=root
+      - OPENCART_DB_PASSWORD=ajay2701
+      - OPENCART_DB_DATABASE=jadau
+      - OPENCART_DB_PORT=3306
+      - OPENCART_DB_PREFIX=oc_
+    ports:
+      - "80:80"
+    volumes:
+      - opencart_data:/var/www/html
+
+volumes:
+  db_data:
+  opencart_data:
